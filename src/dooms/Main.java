@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String commandArgumentos = "";
-        String command = "";
+        String commandArgumentos;
+        String command;
         Scanner scan = new Scanner(System.in);
         boolean salir = false;
         Utilitarias u = new Utilitarias();
@@ -45,6 +45,7 @@ public class Main {
                     System.out.println(u.dia_siguiente(commandArgumentos).toString());
                     break;
                 case "dias_desde_primero_enero ":
+                    System.out.println(u.dias_desde_primero_enero(commandArgumentos));
                     break;
                 case "dia_primero_enero ":
                     break;
@@ -70,10 +71,5 @@ public class Main {
         catch (IllegalStateException ignored){
             return in;
         }
-    }
-
-    private static boolean excepciones(String argumentos){
-        Fechas f = Fechas.parseFecha(argumentos);
-        return f.anno == 1582 && f.mes == 10;
     }
 }
