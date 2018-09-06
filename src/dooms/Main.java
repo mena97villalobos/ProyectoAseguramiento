@@ -71,4 +71,9 @@ public class Main {
             return in;
         }
     }
+
+    private static boolean excepciones(String argumentos){
+        Fechas f = Fechas.parseFecha(argumentos);
+        return f.anno == 1582 && f.mes == 10;
+    }
 }
