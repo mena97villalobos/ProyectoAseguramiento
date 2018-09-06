@@ -15,19 +15,21 @@ public class Fechas {
     }
 
     static int parseAnno(String argumentos){
-        return Integer.parseInt(argumentos);
+        int anno = Integer.parseInt(argumentos);
+        return anno >= 1582 ? anno : -1; //Validar que el año este en el rango valido
     }
 
     static Fechas parseFecha(String argumentos){
+        //Uso de Regex para parsear una fecha en el formato aaaa mm dd no se aceptan numeros negativos
         String patron = "(\\d{4})\\s(\\d{2})\\s(\\d{2})";
         Pattern p = Pattern.compile(patron);
         Matcher m = p.matcher(argumentos);
         m.find();
         try {
             return new Fechas(
-                    Integer.parseInt(m.group(1)),
-                    Integer.parseInt(m.group(2)),
-                    Integer.parseInt(m.group(3)));
+                    Integer.parseInt(m.group(1)), //año
+                    Integer.parseInt(m.group(2)), //mes
+                    Integer.parseInt(m.group(3))); // dia
         }
         catch(Exception ignored){
             return null;
