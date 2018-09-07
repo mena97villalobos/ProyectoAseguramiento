@@ -49,7 +49,7 @@ public class Main {
                     System.out.println(u.dias_desde_primero_enero(commandArgumentos));
                     break;
                 case "dia_primero_enero ":
-                    break;
+                    System.out.println(u.dia_primero_enero(commandArgumentos));
                 case "imprimir 4x3 ":
                     break;
                 case "salir":
