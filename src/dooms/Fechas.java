@@ -16,7 +16,7 @@ public class Fechas {
 
     static int parseAnno(String argumentos){
         int anno = Integer.parseInt(argumentos);
-        return anno >= 1582 ? anno : -1; //Validar que el año este en el rango valido
+        return anno >= 1582 ? anno : -1; //Validar que el año esté en el rango valido
     }
 
     static Fechas parseFecha(String argumentos){

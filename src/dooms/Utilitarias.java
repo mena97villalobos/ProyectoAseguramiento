@@ -99,39 +99,17 @@ public class Utilitarias {
         return -1; //Fecha no es valida o no es una tupla
     }
 
-    protected int dia_primero_enero(String argumentos){
-        //Fechas f = Fechas.parseAnno(argumentos);
-        int d = 1;   //Primer dia
-        int m = 0;  // Primer mes
-        int a= Integer.parseInt(argumentos);//f.anno;
-
-        boolean esBisiesto = bisiesto(a);
-
+    int dia_primero_enero(String argumentos){
+        int a = Fechas.parseAnno(argumentos);
         int ultimos2Digitos = a%100;
-
         int siglo = a/100+1;
-
         int anchorDay = ((5*siglo + ((siglo-1) / 4))+4)%7;
-        int diaReferencia = (((ultimos2Digitos/12) + ultimos2Digitos%12 +
-                (ultimos2Digitos%12 / 4)) + anchorDay)%7;
-
-        //indice -> mes,valor -> dia de referencia
-        int[] mesReferencia = {3,7,7,4,2,6,4,1,5,3,7,5};
-
-        int resultado = 0;
-        if(esBisiesto){
-            int offset = d - (mesReferencia[m]+1);
-            resultado = (diaReferencia + offset)%7;
-            if(resultado < 0){
-                resultado = 7 + resultado;
-            }
-        }
-        else{
-            int offset = d - mesReferencia[m];
-            resultado = (diaReferencia + offset)%7;
-            if(resultado < 0){
-                resultado = 7 + resultado;
-            }
+        int diaReferencia = (((ultimos2Digitos/12) + ultimos2Digitos%12 + (ultimos2Digitos%12 / 4)) + anchorDay)%7;
+        int resultado;
+        int offset = bisiesto(a) ? -3 : -2;
+        resultado = (diaReferencia + offset)%7;
+        if(resultado < 0){
+            resultado = 7 + resultado;
         }
         return resultado;
     }
