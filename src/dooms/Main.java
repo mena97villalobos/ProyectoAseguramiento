@@ -50,8 +50,10 @@ public class Main {
                     break;
                 case "dia_primero_enero ":
                     System.out.println(u.dia_primero_enero(commandArgumentos));
+                    break;
                 case "imprimir_4x3 ":
                     u.imprimir_4x3(commandArgumentos);
+                    break;
                 case "salir":
                     salir = true;
                     break;
@@ -62,7 +64,7 @@ public class Main {
     }
 
     private static String limpiarEntrada(String in){
-        String patron = "^([a-z_]*(4x3)+\\s)"; //Utilizar Regex para obtener la función que se desea utilizar
+        String patron = "^([a-z_]*(4x3)*\\s)"; //Utilizar Regex para obtener la función que se desea utilizar
         Pattern p = Pattern.compile(patron);
         Matcher m = p.matcher(in);
         try {

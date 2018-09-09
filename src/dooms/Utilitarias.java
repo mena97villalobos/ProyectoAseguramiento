@@ -2,7 +2,7 @@ package dooms;
 
 import java.util.ArrayList;
 
-public class Utilitarias {
+class Utilitarias {
     private ArrayList<Integer> meses31 = new ArrayList<>(); //Almacenar una lista de los meses con 31 días
 
     Utilitarias(){
@@ -114,7 +114,7 @@ public class Utilitarias {
         return resultado;
     }
 
-    protected ArrayList creaCalendario (int anno, int dia){
+    private ArrayList<Mes> creaCalendario(int anno, int dia){
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();
         auxiliar.add("   D ");
@@ -131,19 +131,22 @@ public class Utilitarias {
             ArrayList<String> fila = new ArrayList<>();
             Mes mes = new Mes(nombreMes,numDias);
             mes.calendario.add(auxiliar);
-
             for (int i = 1; i <= dia; i++)
-                fila.add("    ");
-
-            for (int j = 1; j <= mes.cantDias; j++) {
+                fila.add("    "); //Rellenar días hasta el primero del mes
+            int j = 1;
+            while(j <= mes.cantDias){
+                if(j == 5 && anno == 1582 && k == 10){
+                    j = 15;
+                }
                 if (dia % 7 == 0 && dia != 0){
                     mes.calendario.add((ArrayList<String>) fila.clone());
                     fila.clear();
                 }
                 fila.add (( j < 10) ? "   "+j : "  "+j);
                 dia += 1;
+                j++;
             }
-
+            mes.calendario.add((ArrayList<String>) fila.clone());
             dia %= 7;
             meses.add(mes);
         }
@@ -151,15 +154,15 @@ public class Utilitarias {
     }
 
 
-    protected void imprimir_4x3(String argumentos){
+    void imprimir_4x3(String argumentos){
         int anno = Integer.parseInt(argumentos);
         int dia = dia_primero_enero(argumentos);
         ArrayList<Mes> meses = creaCalendario(anno,dia);
         //Recorre array de calendarios y los imprime
         for(int j = 0; j < 12; j+=3){
-            String m1 = "";
-            String m2 = "";
-            String m3 = "";
+            String m1;
+            String m2;
+            String m3;
             for (int i = -1; i<8; i++){
                 m1 = meses.get(j).toString(i);
                 m2 = meses.get(j+1).toString(i);
