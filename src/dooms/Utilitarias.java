@@ -114,9 +114,7 @@ public class Utilitarias {
         return resultado;
     }
 
-    protected void imprimir_4x3(String argumentos){
-        int anno = Integer.parseInt(argumentos);
-        int dia = dia_primero_enero(argumentos);
+    protected ArrayList creaCalendario (int anno, int dia){
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();
         auxiliar.add("   D ");
@@ -126,15 +124,18 @@ public class Utilitarias {
         auxiliar.add("  J ");
         auxiliar.add("  V ");
         auxiliar.add("  S");
+        // Crea un calendario mensual y lo almacena en un array
         for (int k = 1; k <= 12; k++) {
             int numDias = (k == 2 ? (bisiesto(anno) ? 29 : 28) : (meses31.indexOf(k) != -1 ? 31 : 30));
             String nombreMes = Meses.getById(k).toString();
             ArrayList<String> fila = new ArrayList<>();
             Mes mes = new Mes(nombreMes,numDias);
             mes.calendario.add(auxiliar);
+
             for (int i = 1; i <= dia; i++)
                 fila.add("    ");
-            for (int j = 1; j <= numDias; j++) {
+
+            for (int j = 1; j <= mes.cantDias; j++) {
                 if (dia % 7 == 0 && dia != 0){
                     mes.calendario.add((ArrayList<String>) fila.clone());
                     fila.clear();
@@ -142,10 +143,19 @@ public class Utilitarias {
                 fila.add (( j < 10) ? "   "+j : "  "+j);
                 dia += 1;
             }
+
             dia %= 7;
             meses.add(mes);
         }
+        return meses;
+    }
 
+
+    protected void imprimir_4x3(String argumentos){
+        int anno = Integer.parseInt(argumentos);
+        int dia = dia_primero_enero(argumentos);
+        ArrayList<Mes> meses = creaCalendario(anno,dia);
+        //Recorre array de calendarios y los imprime
         for(int j = 0; j < 12; j+=3){
             String m1 = "";
             String m2 = "";
@@ -158,8 +168,6 @@ public class Utilitarias {
 
             }
         }
-
     }
-
 
 }
