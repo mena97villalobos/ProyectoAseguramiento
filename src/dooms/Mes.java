@@ -14,19 +14,22 @@ public class Mes {
     }
 
 
-    public void toString(int fila) {
+    public String toString(int fila) {
+        String str = "";
         if(fila == -1)
-            System.out.print(nombre);
+            str= "            "+this.nombre+"        ";
         else{
             try{
                 ArrayList<String> aux = this.calendario.get(fila);
                 for (String s : aux) {
-                    System.out.print(s);
+                    str+=s;
                 }
+                str+="|";
             }catch(IndexOutOfBoundsException ignored){
-                System.out.print('\n');
+                str = "                             ";
             }
         }
+        return str;
 
     }
 }

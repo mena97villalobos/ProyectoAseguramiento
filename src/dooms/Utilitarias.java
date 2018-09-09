@@ -119,13 +119,13 @@ public class Utilitarias {
         int dia = dia_primero_enero(argumentos);
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();
-        auxiliar.add("D");
-        auxiliar.add("L");
-        auxiliar.add("K");
-        auxiliar.add("M");
-        auxiliar.add("J");
-        auxiliar.add("V");
-        auxiliar.add("S");
+        auxiliar.add("   D ");
+        auxiliar.add("  L ");
+        auxiliar.add("  K ");
+        auxiliar.add("  M ");
+        auxiliar.add("  J ");
+        auxiliar.add("  V ");
+        auxiliar.add("  S");
         for (int k = 1; k <= 12; k++) {
             int numDias = (k == 2 ? (bisiesto(anno) ? 29 : 28) : (meses31.indexOf(k) != -1 ? 31 : 30));
             String nombreMes = Meses.getById(k).toString();
@@ -133,23 +133,29 @@ public class Utilitarias {
             Mes mes = new Mes(nombreMes,numDias);
             mes.calendario.add(auxiliar);
             for (int i = 1; i <= dia; i++)
-                fila.add("     ");
+                fila.add("    ");
             for (int j = 1; j <= numDias; j++) {
                 if (dia % 7 == 0 && dia != 0){
-                    mes.calendario.add(fila);
+                    mes.calendario.add((ArrayList<String>) fila.clone());
                     fila.clear();
                 }
-                fila.add (( j < 10) ? "    "+j : "   "+j);
+                fila.add (( j < 10) ? "   "+j : "  "+j);
                 dia += 1;
             }
             dia %= 7;
             meses.add(mes);
         }
-        for(int j = 0; j < 12; j++){
-            for (int i1 = 0; i1 < meses.size(); i1++) {
-                for (int i = -1; i<7; i++){
 
-                }
+        for(int j = 0; j < 12; j+=3){
+            String m1 = "";
+            String m2 = "";
+            String m3 = "";
+            for (int i = -1; i<8; i++){
+                m1 = meses.get(j).toString(i);
+                m2 = meses.get(j+1).toString(i);
+                m3 = meses.get(j+2).toString(i);
+                System.out.println(m1+"    "+m2+"    "+m3);
+
             }
         }
 
