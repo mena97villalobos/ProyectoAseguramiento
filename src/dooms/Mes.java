@@ -24,6 +24,9 @@ public class Mes {
                 for (String s : aux) {
                     str+=s;
                 }
+                for (int i = aux.size(); i <7 ; i++) {
+                    str+="    ";
+                }
                 str+="|";
             }catch(IndexOutOfBoundsException ignored){
                 str = "                             ";

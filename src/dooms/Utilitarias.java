@@ -140,11 +140,12 @@ public class Utilitarias {
                     mes.calendario.add((ArrayList<String>) fila.clone());
                     fila.clear();
                 }
+                j= ((anno==1582&&j==5&&mes.nombre=="Octubre")?15: j);
                 fila.add (( j < 10) ? "   "+j : "  "+j);
                 dia += 1;
             }
-
             dia %= 7;
+            mes.calendario.add(fila);
             meses.add(mes);
         }
         return meses;
