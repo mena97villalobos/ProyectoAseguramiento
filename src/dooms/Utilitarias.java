@@ -115,6 +115,45 @@ public class Utilitarias {
     }
 
     protected void imprimir_4x3(String argumentos){
+        int anno = Integer.parseInt(argumentos);
+        int dia = dia_primero_enero(argumentos);
+        ArrayList<String> auxiliar = new ArrayList<>();
+        ArrayList<Mes> meses = new ArrayList<>();
+        auxiliar.add("D");
+        auxiliar.add("L");
+        auxiliar.add("K");
+        auxiliar.add("M");
+        auxiliar.add("J");
+        auxiliar.add("V");
+        auxiliar.add("S");
+        for (int k = 1; k <= 12; k++) {
+            int numDias = (k == 2 ? (bisiesto(anno) ? 29 : 28) : (meses31.indexOf(k) != -1 ? 31 : 30));
+            String nombreMes = Meses.getById(k).toString();
+            ArrayList<String> fila = new ArrayList<>();
+            Mes mes = new Mes(nombreMes,numDias);
+            mes.calendario.add(auxiliar);
+            for (int i = 1; i <= dia; i++)
+                fila.add("     ");
+            for (int j = 1; j <= numDias; j++) {
+                if (dia % 7 == 0 && dia != 0){
+                    mes.calendario.add(fila);
+                    fila.clear();
+                }
+                fila.add (( j < 10) ? "    "+j : "   "+j);
+                dia += 1;
+            }
+            dia %= 7;
+            meses.add(mes);
+        }
+        for(int j = 0; j < 12; j++){
+            for (int i1 = 0; i1 < meses.size(); i1++) {
+                for (int i = -1; i<7; i++){
+
+                }
+            }
+        }
 
     }
+
+
 }
