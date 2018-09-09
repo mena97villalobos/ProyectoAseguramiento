@@ -2,19 +2,19 @@ package dooms;
 
 import java.util.ArrayList;
 
-public class Mes {
+class Mes {
 
     ArrayList<ArrayList<String>> calendario = new ArrayList();
-    String nombre;
+    private String nombre;
     int cantDias;
 
-    public Mes(String nombre, int cantDias) {
+    Mes(String nombre, int cantDias) {
         this.nombre = nombre;
         this.cantDias = cantDias;
     }
 
 
-    public String toString(int fila) {
+    String toString(int fila) {
         String str = "";
         if(fila == -1)
             str= "            "+this.nombre+"        ";
@@ -22,10 +22,10 @@ public class Mes {
             try{
                 ArrayList<String> aux = this.calendario.get(fila);
                 for (String s : aux) {
-                    str+=s;
+                    str += s;
                 }
                 for (int i = aux.size(); i <7 ; i++) {
-                    str+="    ";
+                    str += "    ";
                 }
                 str+="|";
             }catch(IndexOutOfBoundsException ignored){
