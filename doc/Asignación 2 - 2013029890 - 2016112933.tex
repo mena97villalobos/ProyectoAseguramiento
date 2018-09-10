@@ -1,0 +1,154 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{listings}
+\graphicspath{ {D:/OneDrive/TEC/II Semestre 2018/Aseguramiento/Asignación 2/} }
+\renewcommand*\contentsname{\'Indice}
+\renewcommand\refname{Referencias}
+
+\ifCLASSOPTIONcompsoc
+\usepackage[nocompress]{cite}
+\else
+\usepackage{cite}
+\fi
+
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+	\title{Asignaci\'on 2 \\ \large Instituto Tecnol\'ogico de Costa Rica \\ Escuela de Ingenier\'ia en Computaci\'on\\ Aseguramiento de la Calidad del Software\\ Prof. Ignacio Trejos Zelaya}
+	
+	
+	\author{Franco~Quiros,~Carnet~2013029890\\ Bryan~Mena,~Carnet~2016112933 }
+	
+	\markboth{Asignaci\'on 2,~Miercoles~12~, Septiembre~2018}%
+	{Shell \MakeLowercase{\textit{et al.}}: Asignaci\'on 2}
+	\maketitle
+	
+	\IEEEdisplaynontitleabstractindextext
+	
+	\IEEEpeerreviewmaketitle
+	
+	\section{El Calendario Gregoriano}
+	\par Es de origen europeo, llegó a sustituir el calendario Juliano en 1582, incorporó los años bisiestos al agregar un día extra a febrero en ciertas fechas. El propósito de su implementación era eliminar el desfase que hacía que la Pascua no se celebrara en el momento correcto. Un error de decimales en el cálculo del calendario Juliano hizo que entre los años 325 y 1582 se acumulara un error de aproximadamente 10 días, para evitar este desfase en el calendario gregoriano se establecieron una serie de reglas que contrarrestaban el efecto del redondeo:
+	\begin{itemize}
+		\item Cada 4 años es bisiesto, se agrega un día a Febrero
+		\item Si el año es múltiplo de 100 no es bisiesto
+		\item Si el año es múltiplo de 400, es bisiesto
+	\end{itemize}
+	\par El desfase antes mencionado se contrarrestó cambiando la fecha 5 de Octubre de 1582 por 15 de Octubre de 1582.
+	
+	\section{Relación entre la defunción de Cervantes y Shakespeare}
+	\par El día 23 de abril de cada año se celebra el Día del Libro en conmemoración a la muerte de William Shakespeare y Miguel de Cervantes en 1616, sin embargo las muertes no sucedieron el mismo día, existía un desfase entre el calendario Inglés y el Español, para los ingleses Shakespeare murió el 23 de abril pero para los españoles murió el 3 de mayo, esto dado que Inglaterra adoptó el calendario Gregoriano hasta 1752 y España o hizo inmediatamente.
+	
+	\section{Requerimientos Funcionales}
+	\par Para el desarrollo de esta asignación se siguen los requerimientos dados en la especificación de la Asignación 2, a estos requerimientos se les añadieron conceptos de validación de datos entre otros como se menciona a continuación:
+	\begin{itemize}
+		\item R0(fecha\textunderscore es\textunderscore tupla): Dado el uso del lenguaje de programación Java, el objetivo de este requerimiento pasa a ser la validación de la creación correcta de un objeto tipo Fechas a partir del argumento dado en la línea de comandos.
+		\item R7 Validación de fechas: Como se menciona en el resumen de la investigación acerca del calendario gregoriano se requiere la validación de la excepción existente en el calendario (Salto del 4 de Octubre de 1582 al 15 de Octubre de 1582).
+		\item R8 Validación del año: Se requiere que el año que se esta evaluando en funciones como \textit{bisiesto} sea valido dentro del contexto del programa, esto es: año $\geq$ 1582
+	\end{itemize}  
+
+\section{Trabajo Final}
+\subsection{Decisiones de Diseño Tomadas}
+	\par Para este proyecto es importante mencionar las siguientes decisiones de diseño tomadas por el equipo de trabajo:
+	\begin{itemize}
+		\item Se decide utilizar varias clases dentro del programa con el fin de mantener el principio de \textit{Single Responsability} beneficiando así la mantenibilidad del código
+		\begin{itemize}
+			\item Clase Fecha: Manejo de fechas según el requerimiento R0 de la especificación, y el parseo de las mismas de la línea de comandos
+			\item Clase Mes: Almacenamiento de la información de un mes como su nombre el calendario asociado a ese mes y el número de días que tiene el mes
+			\item Clase Utilitarias: Contiene las funcionalidades necesarias para la implementación de esta asignación
+			\item Enum Meses: Almacenar el par (nombreMes, numeroMes) para una busqueda sencilla dentro de los algoritmos
+		\end{itemize}
+		\item Velar por el principio de \textit{Single Responsability} creando una función \textit{crearCalenadrio} con la lógica para crear un calendario y otra función \textit{imprimir\textunderscore4x3} que imprima el calendario deseado
+		\item Uso de una matriz para almacenar los días del calendario de un mes en especifico con el fin de fácil acceso y la fácil modificación de los datos 
+	\end{itemize}
+\subsection{Pruebas Realizadas}
+	\par Para finalizar con el trabajo se realizaron una serie de pruebas para verificar los requerimientos funcionales dados en la especificación:
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{p1.png}
+		\caption{Pruebas de varias de las funcionalidades del proyecto}
+	\end{figure}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{p2.png}
+		\caption{Muestra del comando de ayuda presente dentro del programa}
+	\end{figure}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{p3.png}
+		\caption{Calendario de 1582}
+	\end{figure}
+\subsection{Diagrama de Clases}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{diagrama.png}
+		\caption{Diagrama de Clases del proyecto finalizado con sus atributos y métodos}
+	\end{figure}
+\section{Instrucciones de uso}
+\par Para el uso del programa se tienen los siguientes comandos:
+\begin{itemize}
+	\item \textbf{\textit{-h}}: Comando de ayuda muestra una pequeña guía con las funcionalidades del programa
+	\item \textbf{\textit{fecha\textunderscore~es\textunderscore~tupla aaaa mm dd}}: Verificar si una fecha se puede representar en el programa
+	\item \textbf{\textit{bisiesto aaaa}}: Retorna verdadero o falso dependiendo si el año dado es bisiesto o no
+	\item \textbf{\textit{fecha\textunderscore~es\textunderscore~valida aaaa mm dd}}: Verifica que la fecha sea valida
+	\item \textbf{\textit{dia\textunderscore~siguiente aaaa mm dd}}: Retorna la fecha siguiente a la fecha dada
+	\item \textbf{\textit{dias\textunderscore~desde\textunderscore~primero\textunderscore~enero aaaa mm dd}}: Retorna la cantidad de dias transcurridos entre el primero de enero del año dado a la fecha dada
+	\item \textbf{\textit{dia\textunderscore~primero\textunderscore~enero aaaa}}: Retorna el número del día en que cae el 1 de Enero del año dado
+	\item \textbf{\textit{imprimir\textunderscore~4x3 aaaa}}: Imprime el calendario en una matriz 4x3 del año dado
+	\item \textbf{\textit{salir}}: Termina la ejecución del programa
+\end{itemize}
+\section{Análisis de Resultados}
+\par Al final del desarrollo de este proyecto terminamos con una pieza de software que se considera ideal y se adapta a los requerimientos funcionales dados en la especificación original del proyecto. 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}
