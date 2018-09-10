@@ -117,6 +117,7 @@ class Utilitarias {
     private ArrayList<Mes> creaCalendario(int anno, int dia){
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();
+        //Arreglo auxiliar que contiene la fila 1 de los calendarios de cada mes (los dias de la semana)
         auxiliar.add("   D ");
         auxiliar.add("  L ");
         auxiliar.add("  K ");
@@ -125,18 +126,19 @@ class Utilitarias {
         auxiliar.add("  V ");
         auxiliar.add("  S");
         // Crea un calendario mensual y lo almacena en un array
-        for (int k = 1; k <= 12; k++) {
+        for (int k = 1; k <= 12; k++) { //Iterar sobre los meses de cada año
+            //Obtener el numero de dias del mes
             int numDias = (k == 2 ? (bisiesto(anno) ? 29 : 28) : (meses31.indexOf(k) != -1 ? 31 : 30));
             String nombreMes = Meses.getById(k).toString();
             ArrayList<String> fila = new ArrayList<>();
             Mes mes = new Mes(nombreMes,numDias);
-            mes.calendario.add(auxiliar);
+            mes.calendario.add(auxiliar); //Añadir fila con los dias de la semana
             for (int i = 1; i <= dia; i++)
                 fila.add("    "); //Rellenar días hasta el primero del mes
             int j = 1;
             while(j <= mes.cantDias){
                 if(j == 5 && anno == 1582 && k == 10){
-                    j = 15;
+                    j = 15; //Validación de la excepción de Octubre de 1582
                 }
                 if (dia % 7 == 0 && dia != 0){
                     mes.calendario.add((ArrayList<String>) fila.clone());
@@ -158,7 +160,7 @@ class Utilitarias {
         int anno = Integer.parseInt(argumentos);
         int dia = dia_primero_enero(argumentos);
         ArrayList<Mes> meses = creaCalendario(anno,dia);
-        //Recorre array de calendarios y los imprime
+        //Recorre array de calendarios y los imprime en una matriz 4 x 3
         System.out.println("\n\t\t\t\t\t\t\t\t\t\tCalendario " + Integer.toString(anno) + "\n");
         for(int j = 0; j < 12; j+=3){
             String m1;
