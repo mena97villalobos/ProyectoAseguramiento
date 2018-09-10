@@ -159,6 +159,7 @@ class Utilitarias {
         int dia = dia_primero_enero(argumentos);
         ArrayList<Mes> meses = creaCalendario(anno,dia);
         //Recorre array de calendarios y los imprime
+        System.out.println("\n\t\t\t\t\t\t\t\t\t\tCalendario " + Integer.toString(anno) + "\n");
         for(int j = 0; j < 12; j+=3){
             String m1;
             String m2;
