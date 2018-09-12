@@ -48,7 +48,7 @@
 	\title{Asignaci\'on 2 \\ \large Instituto Tecnol\'ogico de Costa Rica \\ Escuela de Ingenier\'ia en Computaci\'on\\ Aseguramiento de la Calidad del Software\\ Prof. Ignacio Trejos Zelaya}
 	
 	
-	\author{Franco~Quiros,~Carnet~2013029890\\ Bryan~Mena,~Carnet~2016112933 }
+	\author{Franco~Quiros,~Carnet~2013029890\\ Bryan~Mena,~Carnet~2016112933\\ Pablo~Brenes,~Carnet~2016250460}
 	
 	\markboth{Asignaci\'on 2,~Miercoles~12~, Septiembre~2018}%
 	{Shell \MakeLowercase{\textit{et al.}}: Asignaci\'on 2}
@@ -68,7 +68,7 @@
 	\par El desfase antes mencionado se contrarrestó cambiando la fecha 5 de Octubre de 1582 por 15 de Octubre de 1582.
 	
 	\section{Relación entre la defunción de Cervantes y Shakespeare}
-	\par El día 23 de abril de cada año se celebra el Día del Libro en conmemoración a la muerte de William Shakespeare y Miguel de Cervantes en 1616, sin embargo las muertes no sucedieron el mismo día, existía un desfase entre el calendario Inglés y el Español, para los ingleses Shakespeare murió el 23 de abril pero para los españoles murió el 3 de mayo, esto dado que Inglaterra adoptó el calendario Gregoriano hasta 1752 y España o hizo inmediatamente.
+	\par El día 23 de abril de cada año se celebra el Día del Libro en conmemoración a la muerte de William Shakespeare y Miguel de Cervantes en 1616, sin embargo las muertes no sucedieron el mismo día, existía un desfase entre el calendario Inglés y el Español, para los ingleses Shakespeare murió el 23 de abril pero para los españoles murió el 3 de mayo, esto dado que Inglaterra adoptó el calendario Gregoriano hasta 1752 y España lo hizo inmediatamente.
 	
 	\section{Requerimientos Funcionales}
 	\par Para el desarrollo de esta asignación se siguen los requerimientos dados en la especificación de la Asignación 2, a estos requerimientos se les añadieron conceptos de validación de datos entre otros como se menciona a continuación:
@@ -84,13 +84,14 @@
 	\begin{itemize}
 		\item Se decide utilizar varias clases dentro del programa con el fin de mantener el principio de \textit{Single Responsability} beneficiando así la mantenibilidad del código
 		\begin{itemize}
-			\item Clase Fecha: Manejo de fechas según el requerimiento R0 de la especificación, y el parseo de las mismas de la línea de comandos
-			\item Clase Mes: Almacenamiento de la información de un mes como su nombre el calendario asociado a ese mes y el número de días que tiene el mes
-			\item Clase Utilitarias: Contiene las funcionalidades necesarias para la implementación de esta asignación
+			\item Clase Fecha: Manejo de fechas según el requerimiento R0 de la especificación, y el parseo de las mismas a partir de un argumento en la línea de comandos
+			\item Clase Mes: Almacenamiento de la información de un mes, su nombre, el calendario asociado a ese mes y el número de días que tiene el mes
+			\item Clase Utilitarias: Contiene las funciones mencionadas en la especificación de esta Asignación 2, además de otras funciones auxiliares
 			\item Enum Meses: Almacenar el par (nombreMes, numeroMes) para una busqueda sencilla dentro de los algoritmos
 		\end{itemize}
 		\item Velar por el principio de \textit{Single Responsability} creando una función \textit{crearCalenadrio} con la lógica para crear un calendario y otra función \textit{imprimir\textunderscore4x3} que imprima el calendario deseado
 		\item Uso de una matriz para almacenar los días del calendario de un mes en especifico con el fin de fácil acceso y la fácil modificación de los datos 
+		\item Implementación de un menú por línea de comandos para la facilidad de uso del programa
 	\end{itemize}
 \subsection{Pruebas Realizadas}
 	\par Para finalizar con el trabajo se realizaron una serie de pruebas para verificar los requerimientos funcionales dados en la especificación:
@@ -109,6 +110,12 @@
 		\includegraphics[width=\linewidth]{p3.png}
 		\caption{Calendario de 1582}
 	\end{figure}
+	\par Además de las pruebas antes mostradas se implementa dentro del programa una función para realizar pruebas basadas en un archivo de texto (Véase archivo test.txt incluido en la carpeta de Código del proyecto como ejemplo del formato del archivo), un ejemplo del comando mencionado se puede apreciar en la fig 4.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{p5.png}
+		\caption{Uso del comando \textit{probar\textunderscore archivo}}
+	\end{figure}
 \subsection{Diagrama de Clases}
 	\begin{figure}[h!]
 		\centering
@@ -119,17 +126,23 @@
 \par Para el uso del programa se tienen los siguientes comandos:
 \begin{itemize}
 	\item \textbf{\textit{-h}}: Comando de ayuda muestra una pequeña guía con las funcionalidades del programa
-	\item \textbf{\textit{fecha\textunderscore~es\textunderscore~tupla aaaa mm dd}}: Verificar si una fecha se puede representar en el programa
+	\item \textbf{\textit{fecha\textunderscore es\textunderscore tupla aaaa mm dd}}: Verificar si una fecha se puede representar en el programa
 	\item \textbf{\textit{bisiesto aaaa}}: Retorna verdadero o falso dependiendo si el año dado es bisiesto o no
-	\item \textbf{\textit{fecha\textunderscore~es\textunderscore~valida aaaa mm dd}}: Verifica que la fecha sea valida
-	\item \textbf{\textit{dia\textunderscore~siguiente aaaa mm dd}}: Retorna la fecha siguiente a la fecha dada
-	\item \textbf{\textit{dias\textunderscore~desde\textunderscore~primero\textunderscore~enero aaaa mm dd}}: Retorna la cantidad de dias transcurridos entre el primero de enero del año dado a la fecha dada
+	\item \textbf{\textit{fecha\textunderscore es\textunderscore valida aaaa mm dd}}: Verifica que la fecha sea valida
+	\item \textbf{\textit{dia\textunderscore siguiente aaaa mm dd}}: Retorna la fecha siguiente a la fecha dada
+	\item \textbf{\textit{dias\textunderscore desde\textunderscore primero\textunderscore enero aaaa mm dd}}: Retorna la cantidad de dias transcurridos entre el primero de enero del año dado a la fecha dada
 	\item \textbf{\textit{dia\textunderscore~primero\textunderscore~enero aaaa}}: Retorna el número del día en que cae el 1 de Enero del año dado
 	\item \textbf{\textit{imprimir\textunderscore~4x3 aaaa}}: Imprime el calendario en una matriz 4x3 del año dado
+	\item \textbf{\textit{probar\textunderscore archivo nombre}}: Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos) (Vease \textit{test.txt} incluido en la carpeta de código como un ejemplo del formato para el archivo de pruebas)
 	\item \textbf{\textit{salir}}: Termina la ejecución del programa
 \end{itemize}
 \section{Análisis de Resultados}
-\par Al final del desarrollo de este proyecto terminamos con una pieza de software que se considera ideal y se adapta a los requerimientos funcionales dados en la especificación original del proyecto. 
+\par Al final del desarrollo de este proyecto terminamos con una pieza de software que se considera ideal y se adapta a los requerimientos funcionales dados en la especificación original del proyecto, a pesar de esto dado el lenguaje de implementación (java) y la manera en que se programó la función \textit{fecha\textunderscore es\textunderscore valida} esta admite valores de punto flotante, aunque a la hora de convertirlo a un objeto tipo fecha, el punto flotante se ignora como se puede ver en la fig 6.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{p4.png}
+	\caption{Parsing de una fecha con decimales y su resultado}
+\end{figure}
 	
 	
 	

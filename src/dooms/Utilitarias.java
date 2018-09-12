@@ -17,7 +17,7 @@ class Utilitarias {
 
     boolean fecha_es_tupla(String argumentos){
         Fechas f = Fechas.parseFecha(argumentos);
-        return f != null;
+        return f != null && fecha_es_valida(argumentos);
     }
 
     boolean bisiesto(String argumentos){
