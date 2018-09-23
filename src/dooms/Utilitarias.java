@@ -114,6 +114,45 @@ class Utilitarias {
         return resultado;
     }
 
+    //Agregado asignación 3
+    Fechas fecha_futura(String argumentos){
+        Fechas f = Fechas.parseFecha(argumentos);
+        int n = f.aux;
+        if(f.anno == 1582 && f.mes == 10)
+            n += 10; //Validar excepción 10 de octubre de 1582
+        //Obtener el día tope del mes actual
+        int topeMes = f.mes == 2 ? (bisiesto(f.anno) ? 29 : 28) : (meses31.indexOf(f.mes) != -1 ? 31 : 30);
+        int diferenciaMes = topeMes - f.dia; //Diferencia de días para llegar al tope del mes
+        while(n > 0){
+            if(diferenciaMes > n){ //Si n es menor que la diferencia de mes solo se suma n y se retorna
+                f.dia += n;
+                break;
+            }
+            else{ //Sumar hasta el proximo mes
+                f.dia += diferenciaMes + 1;
+                n -= diferenciaMes + 1;
+            }
+            if (f.mes == 12){
+                f.anno++;
+                f.mes = 1;
+                f.dia = 1;
+                //Actualizar valores del tope del mes y de la diferencia de mes
+                topeMes = 31;
+                diferenciaMes = 30;
+                n --;
+            }
+            else{
+                f.mes++;
+                f.dia = 1;
+                //Actualizar valores del tope del mes y de la diferencia de mes
+                topeMes = f.mes == 2 ? (bisiesto(f.anno) ? 29 : 28) : (meses31.indexOf(f.mes) != -1 ? 31 : 30);
+                diferenciaMes = topeMes - f.dia;
+                n --;
+            }
+        }
+        return f;
+    }
+
     private ArrayList<Mes> creaCalendario(int anno, int dia){
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();
@@ -154,7 +193,6 @@ class Utilitarias {
         }
         return meses;
     }
-
 
     void imprimir_4x3(String argumentos){
         int anno = Integer.parseInt(argumentos);

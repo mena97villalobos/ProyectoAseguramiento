@@ -7,6 +7,7 @@ public class Fechas {
     int anno;
     int mes;
     int dia;
+    int aux;
 
     Fechas(int anno, int mes, int dia) {
         this.anno = anno;
@@ -21,15 +22,20 @@ public class Fechas {
 
     static Fechas parseFecha(String argumentos){
         //Uso de Regex para parsear una fecha en el formato aaaa mm dd no se aceptan numeros negativos
-        String patron = "(\\d{4})\\s(\\d{2})\\s(\\d{2})";
+        String patron = "(\\d{4})\\s(\\d{2})\\s(\\d{2})\\s?(\\d*)?";
         Pattern p = Pattern.compile(patron);
         Matcher m = p.matcher(argumentos);
         m.find();
         try {
-            return new Fechas(
+            //Modificado asignación 3 Bryan Mena
+            // Se parsea un numero auxiliar utilizado en los nuevos requerimientos funcionales
+            Fechas f = new Fechas(
                     Integer.parseInt(m.group(1)), //año
                     Integer.parseInt(m.group(2)), //mes
                     Integer.parseInt(m.group(3))); // dia
+            String group4 = m.group(4);
+            f.aux = !group4.equals("") ? Integer.parseInt(group4) : -1;
+            return f;
         }
         catch(Exception ignored){
             return null;

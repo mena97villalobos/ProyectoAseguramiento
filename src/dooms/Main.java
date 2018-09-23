@@ -52,6 +52,7 @@ public class Main {
                     case "dia_primero_enero ":
                         System.out.println(old + u.dia_primero_enero(commandArgumentos));
                         break;
+                    //TODO pruebas para nuevos requerimientos
                     default:
                         System.out.println("Error encontrado");
                         return;
@@ -89,6 +90,7 @@ public class Main {
                             "primero de enero del año dado a la fecha dada\n" +
                             "dia_primero_enero aaaa                 --> Retorna el número del día en que cae el 1 de Enero del año dado\n" +
                             "imprimir_4x3 aaaa                      --> Imprime el calendario en una matriz 4x3 del año dado\n" +
+                            "fecha futura aaaa mm dd n              --> Retorna la fecha que está a n días naturales en el futuro\n" +
                             "probar_archivo nombre                  --> Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos)");
                     break;
                 case "fecha_es_tupla ":
@@ -111,6 +113,12 @@ public class Main {
                     break;
                 case "imprimir_4x3 ":
                     u.imprimir_4x3(commandArgumentos);
+                    break;
+                //Modificado Asignación 3 Bryan Mena
+                //Se añaden los nuevos requerimientos funcionales al menu de línea de comando
+                case "fecha_futura ":
+                    Fechas f = u.fecha_futura(commandArgumentos);
+                    System.out.println(f.toString());
                     break;
                 case "probar_archivo ":
                     testFile(u, commandArgumentos);
