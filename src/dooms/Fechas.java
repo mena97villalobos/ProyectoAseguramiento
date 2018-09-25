@@ -65,16 +65,21 @@ public class Fechas {
         return e;
     }
 
+    //Agregado para asignacion 3
     public boolean esMayorQue (Fechas fechas){
         boolean e = false;
         if (this.anno > fechas.anno) {
             e = true;
         }else{
-            if (this.mes > fechas.mes) {
-                e = true;
-            }else{
-                if (this.dia > fechas.dia) {
+            if (this.anno == fechas.anno){
+                if (this.mes > fechas.mes) {
                     e = true;
+                }else{
+                    if (this.mes == fechas.mes){
+                        if (this.dia > fechas.dia) {
+                            e = true;
+                        }
+                    }
                 }
             }
         }
