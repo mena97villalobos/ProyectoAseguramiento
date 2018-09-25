@@ -91,7 +91,8 @@ public class Main {
                             "dia_primero_enero aaaa                 --> Retorna el número del día en que cae el 1 de Enero del año dado\n" +
                             "imprimir_4x3 aaaa                      --> Imprime el calendario en una matriz 4x3 del año dado\n" +
                             "fecha futura aaaa mm dd n              --> Retorna la fecha que está a n días naturales en el futuro\n" +
-                            "probar_archivo nombre                  --> Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos)");
+                            "probar_archivo nombre                  --> Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos)\n + " +
+                            "dia_semana aaaa mm dd                  --> Calcula que en que día de la semana se da una determinada fecha");
                     break;
                 case "fecha_es_tupla ":
                     System.out.println(u.fecha_es_tupla(commandArgumentos));
@@ -122,6 +123,10 @@ public class Main {
                     break;
                 case "probar_archivo ":
                     testFile(u, commandArgumentos);
+                    break;
+                case "dia_semana ":
+                    int dia = u.dia_semana(commandArgumentos);
+                    System.out.println(dia);
                     break;
                 case "salir":
                     salir = true;

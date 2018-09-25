@@ -153,6 +153,23 @@ class Utilitarias {
         return f;
     }
 
+
+    public int dia_semana(String argumentos){
+        Fechas f = Fechas.parseFecha(argumentos);
+        int anno = f.anno;
+        int mes = f.mes;
+        int dia = f.dia;
+
+
+        int a = (14- mes) / 12;
+        anno = anno - a;
+        mes = mes + (12 * a) - 2;
+
+        int d = (dia + anno + anno/4 - anno/100 + anno/400 + (31* mes)/12)%7;
+
+        return d;
+    }
+
     private ArrayList<Mes> creaCalendario(int anno, int dia){
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();
