@@ -126,7 +126,6 @@ class Utilitarias {
                 f.mes = 1;
                 f.dia = 1;
                 //Actualizar valores del tope del mes y de la diferencia de mes
-                topeMes = 31;
                 diferenciaMes = 30;
                 n --;
             }
@@ -142,10 +141,32 @@ class Utilitarias {
         return f;
     }
 
+    private void getDiasNoHabiles(Fechas f){
+        int diasNoHabiles = 0;
+        int diaSemana = dia_semana(f);
+        int n = f.aux;
+        while(n > 0){
+            diasNoHabiles += 1;
+            diaSemana += 1;
+            if(diaSemana == 6){
+                diasNoHabiles += 2;
+                diaSemana = 1;
+            }
+            n--;
+        }
+        f.aux = diasNoHabiles + 1;
+    }
+
     Fechas fecha_futura_habil(Fechas f){
-        int diasNoHabiles = (f.aux / 5) * 2;
-        f.aux += diasNoHabiles;
-        return fecha_futura(f);
+        getDiasNoHabiles(f);
+        f = fecha_futura(f);
+        if(dia_semana(f) == 0)
+            f = dia_siguiente(f);
+        else if(dia_semana(f) == 6){
+            f.aux = 2;
+            f = fecha_futura(f);
+        }
+        return f;
     }
 
     int dia_semana(Fechas f){
