@@ -15,6 +15,7 @@ public class Main {
 
     }
 
+    /* TODO arreglar el parseo de los comandos
     private static void testFile(Utilitarias u, String nombre) {
         try {
             File archivo = new File(nombre);
@@ -63,7 +64,7 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.err.println("Archivo de prueba: \"" + nombre + "\" no pudo ser abierto.");
         }
-    }
+    } */
 
     private static void menu(Utilitarias u){
 
@@ -77,6 +78,8 @@ public class Main {
             commandArgumentos = scan.nextLine();
             command = limpiarEntrada(commandArgumentos);
             commandArgumentos = commandArgumentos.replace(command, ""); //Obtener la lista de argumentos de un comando
+            Fechas f;
+            int anno;
             switch (command){
                 case "-h":
                     System.out.println("Asignación 2, Aseguramiento de la Calidad del Software" + "\n" +
@@ -98,34 +101,47 @@ public class Main {
                     System.out.println(u.fecha_es_tupla(commandArgumentos));
                     break;
                 case "bisiesto ":
-                    System.out.println(u.bisiesto(commandArgumentos));
+                    anno = Fechas.parseAnno(commandArgumentos);
+                    System.out.println(u.bisiesto(anno));
                     break;
                 case "fecha_es_valida ":
-                    System.out.println(u.fecha_es_valida(commandArgumentos));
+                    f = Fechas.parseFecha(commandArgumentos);
+                    System.out.println(u.fecha_es_valida(f));
                     break;
                 case "dia_siguiente ":
-                    System.out.println(u.dia_siguiente(commandArgumentos).toString());
+                    f = Fechas.parseFecha(commandArgumentos);
+                    System.out.println(u.dia_siguiente(f).toString());
                     break;
                 case "dias_desde_primero_enero ":
-                    System.out.println(u.dias_desde_primero_enero(commandArgumentos));
+                    f = Fechas.parseFecha(commandArgumentos);
+                    System.out.println(u.dias_desde_primero_enero(f));
                     break;
                 case "dia_primero_enero ":
-                    System.out.println(u.dia_primero_enero(commandArgumentos));
+                    anno = Integer.parseInt(commandArgumentos);
+                    System.out.println(u.dia_primero_enero(anno));
                     break;
                 case "imprimir_4x3 ":
-                    u.imprimir_4x3(commandArgumentos);
+                    anno = Integer.parseInt(commandArgumentos);
+                    u.imprimir_4x3(anno);
                     break;
                 //Modificado Asignación 3 Bryan Mena
                 //Se añaden los nuevos requerimientos funcionales al menu de línea de comando
                 case "fecha_futura ":
-                    Fechas f = u.fecha_futura(commandArgumentos);
-                    System.out.println(f.toString());
+                    f = Fechas.parseFecha(commandArgumentos);
+                    System.out.println(u.fecha_futura(f).toString());
                     break;
+                case "fecha_futura_habil ":
+                    f = Fechas.parseFecha(commandArgumentos);
+                    System.out.println(u.fecha_futura_habil(f).toString());
+                    break;
+                    /* TODO
                 case "probar_archivo ":
                     testFile(u, commandArgumentos);
                     break;
+                    */
                 case "dia_semana ":
-                    int dia = u.dia_semana(commandArgumentos);
+                    f = Fechas.parseFecha(commandArgumentos);
+                    int dia = u.dia_semana(f);
                     System.out.println(dia);
                     break;
                 case "salir":

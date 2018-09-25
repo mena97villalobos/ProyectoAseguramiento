@@ -22,7 +22,7 @@ public class Fechas {
 
     static Fechas parseFecha(String argumentos){
         //Uso de Regex para parsear una fecha en el formato aaaa mm dd no se aceptan numeros negativos
-        String patron = "(\\d{4})\\s(\\d{2})\\s(\\d{2})\\s?(\\d*)?";
+        String patron = "(\\d{4})\\s(\\d{1,2})\\s(\\d{1,2})\\s?(\\d*)?";
         Pattern p = Pattern.compile(patron);
         Matcher m = p.matcher(argumentos);
         m.find();
@@ -45,6 +45,10 @@ public class Fechas {
     @Override
     public String toString() {
         return "(Año: " + this.anno + ", Mes: " + this.mes + ", Día: " + this.dia + ")\n";
+    }
+
+    public String toArgumentos(){
+        return this.anno + " " + this.mes + " " + this.dia + " " + this.aux;
     }
 
 

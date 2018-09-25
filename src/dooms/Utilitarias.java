@@ -17,24 +17,17 @@ class Utilitarias {
 
     boolean fecha_es_tupla(String argumentos){
         Fechas f = Fechas.parseFecha(argumentos);
-        return f != null && fecha_es_valida(argumentos);
+        return f != null && fecha_es_valida(f);
     }
 
-    boolean bisiesto(String argumentos){
-        int anno = Fechas.parseAnno(argumentos);
-        //Revisa que se haya podido parsear el año además valida que este en el periodo valido
+    boolean bisiesto(int anno){
         if (anno != 0 && anno >= 1582)
             return ((anno % 4 == 0) && ((anno % 100 != 0) || (anno % 400 == 0)));
         else
             return false;
     }
 
-    private boolean bisiesto(int anno){
-        return ((anno % 4 == 0) && ((anno % 100 != 0) || (anno % 400 == 0)));
-    }
-
-    boolean fecha_es_valida(String argumentos){
-        Fechas f = Fechas.parseFecha(argumentos);
+    boolean fecha_es_valida(Fechas f){
         if(f != null){
             if(f.mes == 2) {
                 return f.anno >= 1582 && f.dia >= 1 && (bisiesto(f.anno) ? f.dia <= 29 : f.dia <= 28);
@@ -54,9 +47,8 @@ class Utilitarias {
             return false;
     }
 
-    Fechas dia_siguiente(String argumentos){
-        Fechas f = Fechas.parseFecha(argumentos);
-        if(f != null && fecha_es_valida(argumentos)) {
+    Fechas dia_siguiente(Fechas f){
+        if(f != null && fecha_es_valida(f)) {
             //Obtener la cantidad de dias de un mes
             int numDias = (f.mes == 2 ? (bisiesto(f.anno) ? 29 : 28) : (meses31.indexOf(f.mes) != -1 ? 31 : 30));
             int dia = f.dia + 1;
@@ -76,9 +68,8 @@ class Utilitarias {
         return new Fechas(0, 0, 0); //Fecha no es valida o no es una tupla
     }
 
-    int dias_desde_primero_enero(String argumentos){
-        Fechas f = Fechas.parseFecha(argumentos);
-        if(f != null && fecha_es_valida(argumentos)) {
+    int dias_desde_primero_enero(Fechas f){
+        if(f != null && fecha_es_valida(f)) {
             int cantDias = 0; //Contador de la cantidad de dias desde el primero de Enero
             for (int i = 1; i < f.mes; i++) { //Iterar sobres los meses que han pasado desde enero a la fecha - 1
                 if (f.anno == 1582 && i == 10) {
@@ -99,14 +90,13 @@ class Utilitarias {
         return -1; //Fecha no es valida o no es una tupla
     }
 
-    int dia_primero_enero(String argumentos){
-        int a = Fechas.parseAnno(argumentos);
-        int ultimos2Digitos = a%100;
-        int siglo = a/100+1;
+    int dia_primero_enero(int anno){
+        int ultimos2Digitos = anno%100;
+        int siglo = anno/100+1;
         int anchorDay = ((5*siglo + ((siglo-1) / 4))+4)%7;
         int diaReferencia = (((ultimos2Digitos/12) + ultimos2Digitos%12 + (ultimos2Digitos%12 / 4)) + anchorDay)%7;
         int resultado;
-        int offset = bisiesto(a) ? -3 : -2;
+        int offset = bisiesto(anno) ? -3 : -2;
         resultado = (diaReferencia + offset)%7;
         if(resultado < 0){
             resultado = 7 + resultado;
@@ -115,8 +105,7 @@ class Utilitarias {
     }
 
     //Agregado asignación 3
-    Fechas fecha_futura(String argumentos){
-        Fechas f = Fechas.parseFecha(argumentos);
+    Fechas fecha_futura(Fechas f){
         int n = f.aux;
         if(f.anno == 1582 && f.mes == 10)
             n += 10; //Validar excepción 10 de octubre de 1582
@@ -153,21 +142,20 @@ class Utilitarias {
         return f;
     }
 
+    Fechas fecha_futura_habil(Fechas f){
+        int diasNoHabiles = (f.aux / 5) * 2;
+        f.aux += diasNoHabiles;
+        return fecha_futura(f);
+    }
 
-    public int dia_semana(String argumentos){
-        Fechas f = Fechas.parseFecha(argumentos);
+    int dia_semana(Fechas f){
         int anno = f.anno;
         int mes = f.mes;
         int dia = f.dia;
-
-
         int a = (14- mes) / 12;
         anno = anno - a;
         mes = mes + (12 * a) - 2;
-
-        int d = (dia + anno + anno/4 - anno/100 + anno/400 + (31* mes)/12)%7;
-
-        return d;
+        return (dia + anno + anno/4 - anno/100 + anno/400 + (31* mes)/12)%7;
     }
 
     public int dias_entre(Fechas f1, Fechas f2){
@@ -231,9 +219,8 @@ class Utilitarias {
         return meses;
     }
 
-    void imprimir_4x3(String argumentos){
-        int anno = Integer.parseInt(argumentos);
-        int dia = dia_primero_enero(argumentos);
+    void imprimir_4x3(int anno){
+        int dia = dia_primero_enero(anno);
         ArrayList<Mes> meses = creaCalendario(anno,dia);
         //Recorre array de calendarios y los imprime en una matriz 4 x 3
         System.out.println("\n\t\t\t\t\t\t\t\t\t\tCalendario " + Integer.toString(anno) + "\n");
