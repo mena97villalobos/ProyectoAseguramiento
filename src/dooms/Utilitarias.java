@@ -170,6 +170,26 @@ class Utilitarias {
         return d;
     }
 
+    public int dias_entre(Fechas f1, Fechas f2){
+        Fechas fechaInicio;
+        Fechas fechaFin;
+        int contador = 0;
+
+        if (f1.esMayorQue(f2)){
+            fechaFin = f1;
+            fechaInicio = f2;
+        }else{
+            fechaFin = f2;
+            fechaInicio = f1;
+        }
+
+        while (!fechaInicio.equals(fechaFin)){
+            contador += 1;
+            //fechaInicio = dia_siguiente(fechaInicio);
+        }
+        return contador;
+    }
+
     private ArrayList<Mes> creaCalendario(int anno, int dia){
         ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<Mes> meses = new ArrayList<>();

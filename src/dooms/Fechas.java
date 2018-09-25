@@ -46,4 +46,34 @@ public class Fechas {
     public String toString() {
         return "(Año: " + this.anno + ", Mes: " + this.mes + ", Día: " + this.dia + ")\n";
     }
+
+
+    //Agregado para asignacion 3
+    public boolean equals(Fechas fechas){
+        boolean e = false;
+        if (this.anno == fechas.anno){
+            if (this.mes == fechas.mes){
+                if (this.dia == fechas.dia){
+                    e = true;
+                }
+            }
+        }
+        return e;
+    }
+
+    public boolean esMayorQue (Fechas fechas){
+        boolean e = false;
+        if (this.anno > fechas.anno) {
+            e = true;
+        }else{
+            if (this.mes > fechas.mes) {
+                e = true;
+            }else{
+                if (this.dia > fechas.dia) {
+                    e = true;
+                }
+            }
+        }
+        return e;
+    }
 }
