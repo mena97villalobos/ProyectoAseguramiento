@@ -1,9 +1,11 @@
 package dooms;
 
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
-public class Fechas {
+class Fechas {
     int anno;
     int mes;
     int dia;
@@ -36,8 +38,7 @@ public class Fechas {
             String group4 = m.group(4);
             f.aux = !group4.equals("") ? Integer.parseInt(group4) : -1;
             return f;
-        }
-        catch(Exception ignored){
+        } catch (Exception ignored) {
             return null;
         }
     }

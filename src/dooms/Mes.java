@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 class Mes {
 
-    ArrayList<ArrayList<String>> calendario = new ArrayList();
-    private String nombre;
-    int cantDias;
+    final ArrayList<ArrayList<String>> calendario = new ArrayList<>();
+    private final String nombre;
+    final int cantDias;
 
     Mes(String nombre, int cantDias) {
         this.nombre = nombre;

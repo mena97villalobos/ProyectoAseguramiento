@@ -3,7 +3,7 @@ package dooms;
 import java.util.ArrayList;
 
 class Utilitarias {
-    private ArrayList<Integer> meses31 = new ArrayList<>(); //Almacenar una lista de los meses con 31 días
+    private final ArrayList<Integer> meses31 = new ArrayList<>(); //Almacenar una lista de los meses con 31 días
 
     Utilitarias(){
         meses31.add(1);
@@ -146,15 +146,19 @@ class Utilitarias {
         int diaSemana = dia_semana(f);
         int n = f.aux;
         while(n > 0){
-            diasNoHabiles += 1;
-            diaSemana += 1;
             if(diaSemana == 6){
                 diasNoHabiles += 2;
                 diaSemana = 1;
             }
+            if(diaSemana == 0){
+                diasNoHabiles += 1;
+                diaSemana = 1;
+            }
+            diasNoHabiles += 1;
+            diaSemana += 1;
             n--;
         }
-        f.aux = diasNoHabiles + 1;
+        f.aux = diasNoHabiles;
     }
 
     Fechas fecha_futura_habil(Fechas f){
@@ -179,7 +183,7 @@ class Utilitarias {
         return (dia + anno + anno/4 - anno/100 + anno/400 + (31* mes)/12)%7;
     }
 
-    public int dias_entre(Fechas f1, Fechas f2){
+    int dias_entre(Fechas f1, Fechas f2){
         Fechas fechaInicio;
         Fechas fechaFin;
         int contador = 0;
@@ -191,10 +195,40 @@ class Utilitarias {
             fechaFin = f2;
             fechaInicio = f1;
         }
-
         while (!fechaInicio.equals(fechaFin)){
             contador += 1;
-            //fechaInicio = dia_siguiente(fechaInicio);
+            fechaInicio = dia_siguiente(fechaInicio);
+        }
+        return contador;
+    }
+
+    int dias_habiles_entre(Fechas f1, Fechas f2){
+        Fechas fechaInicio;
+        Fechas fechaFin;
+        int contador = 0;
+        if (f1.esMayorQue(f2)){
+            fechaFin = f1;
+            fechaInicio = f2;
+        }else{
+            fechaFin = f2;
+            fechaInicio = f1;
+        }
+        int diaActual = dia_semana(fechaInicio);
+        while (!fechaInicio.equals(fechaFin)){
+            if(diaActual == 6){
+                fechaInicio.aux = 2;
+                fechaInicio = fecha_futura(fechaInicio);
+                diaActual = 1;
+            }
+            else if(diaActual == 0){
+                fechaInicio = dia_siguiente(fechaInicio);
+                diaActual = 1;
+            }
+            else {
+                contador += 1;
+                fechaInicio = dia_siguiente(fechaInicio);
+                diaActual += 1;
+            }
         }
         return contador;
     }
@@ -258,5 +292,4 @@ class Utilitarias {
             }
         }
     }
-
 }

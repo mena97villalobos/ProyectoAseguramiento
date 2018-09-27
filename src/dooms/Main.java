@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) {
 
@@ -76,24 +76,29 @@ public class Main {
             commandArgumentos = scan.nextLine();
             command = limpiarEntrada(commandArgumentos);
             commandArgumentos = commandArgumentos.replace(command, ""); //Obtener la lista de argumentos de un comando
-            Fechas f;
+            Fechas f, f2;
+            String[] aux;
             int anno;
             switch (command){
                 case "-h":
                     System.out.println("Asignación 2, Aseguramiento de la Calidad del Software" + "\n" +
                             "Autores: Franco Quiros Carnet: 2013029890, Bryan Mena Carnet: 2016112933, Pablo Brenes Carnet: 2016250460" + "\n" +
                             "Usos del programa: \n" +
-                            "fecha_es_tupla aaaa mm dd              --> Verificar si una fecha se puede representar en el programa\n" +
-                            "bisiesto aaaa                          --> Retorna verdadero o falso dependiendo si el año dado es bisiesto o no\n" +
-                            "fecha_es_valida aaaa mm dd             --> Verifica que la fecha sea valida\n" +
-                            "dia_siguiente aaaa mm dd               --> Retorna la fecha siguiente a la fecha dada\n" +
-                            "dias_desde_primero_enero aaaa mm dd    --> Retorna la cantidad de dias transcurridos entre el" +
+                            "fecha_es_tupla aaaa mm dd                 --> Verificar si una fecha se puede representar en el programa\n" +
+                            "bisiesto aaaa                             --> Retorna verdadero o falso dependiendo si el año dado es bisiesto o no\n" +
+                            "fecha_es_valida aaaa mm dd                --> Verifica que la fecha sea valida\n" +
+                            "dia_siguiente aaaa mm dd                  --> Retorna la fecha siguiente a la fecha dada\n" +
+                            "dias_desde_primero_enero aaaa mm dd       --> Retorna la cantidad de dias transcurridos entre el" +
                             "primero de enero del año dado a la fecha dada\n" +
-                            "dia_primero_enero aaaa                 --> Retorna el número del día en que cae el 1 de Enero del año dado\n" +
-                            "imprimir_4x3 aaaa                      --> Imprime el calendario en una matriz 4x3 del año dado\n" +
-                            "fecha futura aaaa mm dd n              --> Retorna la fecha que está a n días naturales en el futuro\n" +
-                            "probar_archivo nombre                  --> Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos)\n + " +
-                            "dia_semana aaaa mm dd                  --> Calcula que en que día de la semana se da una determinada fecha");
+                            "dia_primero_enero aaaa                    --> Retorna el número del día en que cae el 1 de Enero del año dado\n" +
+                            "imprimir_4x3 aaaa                         --> Imprime el calendario en una matriz 4x3 del año dado\n" +
+                            "***Requerimientos funcionales Asignación 3***\n" +
+                            "fecha_futura aaaa mm dd n                 --> Retorna la fecha que está a n días naturales en el futuro\n" +
+                            "fecha_futura_habil aaaa mm dd n           --> Retorna la fecha que está a n días habiles en el futuro\n" +
+                            "dia_semana aaaa mm dd                     --> Calcula que en que día de la semana se da una determinada fecha\n" +
+                            "dias_entre aaaa mm dd, aaaa mm dd         --> Retorna la cantidad de dias que separa las dos fechas\n" +
+                            "dias_habiles_entre aaaa mm dd, aaaa mm dd --> Retorna la cantidad de dias habiles que separa las dos fechas\n" +
+                            "probar_archivo nombre                     --> Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos)\n");
                     break;
                 case "fecha_es_tupla ":
                     System.out.println(u.fecha_es_tupla(commandArgumentos));
@@ -141,6 +146,18 @@ public class Main {
                     f = Fechas.parseFecha(commandArgumentos);
                     int dia = u.dia_semana(f);
                     System.out.println(dia);
+                    break;
+                case "dias_entre ":
+                    aux = commandArgumentos.split(", ");
+                    f = Fechas.parseFecha(aux[0]);
+                    f2 = Fechas.parseFecha(aux[1]);
+                    System.out.println(u.dias_entre(f, f2));
+                    break;
+                case "dias_habiles_entre ":
+                    aux = commandArgumentos.split(",");
+                    f = Fechas.parseFecha(aux[0]);
+                    f2 = Fechas.parseFecha(aux[1]);
+                    System.out.println(u.dias_habiles_entre(f, f2));
                     break;
                 case "salir":
                     salir = true;
