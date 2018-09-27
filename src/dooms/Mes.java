@@ -15,24 +15,24 @@ class Mes {
 
 
     String toString(int fila) {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         if(fila == -1)
-            str= "            "+this.nombre+"        ";
+            str = new StringBuilder("            " + this.nombre + "        ");
         else{
             try{
                 ArrayList<String> aux = this.calendario.get(fila);
                 for (String s : aux) {
-                    str += s;
+                    str.append(s);
                 }
                 for (int i = aux.size(); i <7 ; i++) {
-                    str += "    ";
+                    str.append("    ");
                 }
-                str+="|";
+                str.append("|");
             }catch(IndexOutOfBoundsException ignored){
-                str = "                             ";
+                str = new StringBuilder("                             ");
             }
         }
-        return str;
+        return str.toString();
 
     }
 }

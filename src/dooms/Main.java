@@ -9,10 +9,8 @@ import java.util.regex.Pattern;
 class Main {
 
     public static void main(String[] args) {
-
         Utilitarias u = new Utilitarias();
         menu(u);
-
     }
 
     private static void menu(Utilitarias u){
