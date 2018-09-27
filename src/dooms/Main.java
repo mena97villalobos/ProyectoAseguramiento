@@ -1,5 +1,7 @@
 package dooms;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,72 +15,42 @@ class Main {
 
     }
 
-    /* TODO arreglar el parseo de los comandos
-    private static void testFile(Utilitarias u, String nombre) {
-        try {
-            File archivo = new File(nombre);
-            Scanner scan = new Scanner(archivo);
-            String commandArgumentos;
-            String command;
-            String old;
-
-            while(scan.hasNextLine()) {
-                commandArgumentos = scan.nextLine();
-
-                if (commandArgumentos.startsWith("#") || commandArgumentos.isEmpty())
-                    continue;
-
-                command = limpiarEntrada(commandArgumentos);
-                old = commandArgumentos + " -> ";
-                commandArgumentos = commandArgumentos.replace(command, ""); //Obtener la lista de argumentos de un comando
-
-                switch (command){
-                    case "fecha_es_tupla ":
-                        System.out.println(old + u.fecha_es_tupla(commandArgumentos));
-                        break;
-                    case "bisiesto ":
-                        System.out.println(old + u.bisiesto(commandArgumentos));
-                        break;
-                    case "fecha_es_valida ":
-                        System.out.println(old + u.fecha_es_valida(commandArgumentos));
-                        break;
-                    case "dia_siguiente ":
-                        System.out.println(old + u.dia_siguiente(commandArgumentos).toString());
-                        break;
-                    case "dias_desde_primero_enero ":
-                        System.out.println(old + u.dias_desde_primero_enero(commandArgumentos));
-                        break;
-                    case "dia_primero_enero ":
-                        System.out.println(old + u.dia_primero_enero(commandArgumentos));
-                        break;
-                    //TODO pruebas para nuevos requerimientos
-                    default:
-                        System.out.println("Error encontrado");
-                        return;
-                }
-
-            }
-            scan.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Archivo de prueba: \"" + nombre + "\" no pudo ser abierto.");
-        }
-    } */
-
     private static void menu(Utilitarias u){
-
-        String commandArgumentos;
-        String command;
+        Fechas f, f2;
+        String[] aux;
+        int anno;
+        String commandArgumentos, command, old;
         Scanner scan = new Scanner(System.in);
-        boolean salir = false;
-
+        boolean salir = false, testing = false;
         while(!salir){
-            System.out.println("Inserte un comando, para ayuda digite \"-h\", digite \"salir\" para salir del programa");
-            commandArgumentos = scan.nextLine();
-            command = limpiarEntrada(commandArgumentos);
-            commandArgumentos = commandArgumentos.replace(command, ""); //Obtener la lista de argumentos de un comando
-            Fechas f, f2;
-            String[] aux;
-            int anno;
+            //Modificado Asignación 3 Bryan Mena Villalobos, incorporar las pruebas por archivo en el menú principal
+            if(testing){
+                if(scan.hasNext()){//Obtener los comandos del archivo de texto
+                    commandArgumentos = scan.nextLine();
+                    if (commandArgumentos.startsWith("#") || commandArgumentos.isEmpty())
+                        command = "ignored"; //Comandos ignorados
+                    else {
+                        command = limpiarEntrada(commandArgumentos);
+                        old = commandArgumentos + " -> ";
+                        commandArgumentos = commandArgumentos.replace(command, ""); //Obtener la lista de argumentos de un comando
+                        System.out.print(old);
+                    }
+                }
+                else { //Salida del archivo de pruebas, se retorna a la entrada de datos por el stdin
+                    testing = false;
+                    scan = new Scanner(System.in);
+                    System.out.println("Inserte un comando, para ayuda digite \"-h\", digite \"salir\" para salir del programa");
+                    commandArgumentos = scan.nextLine();
+                    command = limpiarEntrada(commandArgumentos);
+                    commandArgumentos = commandArgumentos.replace(command, "");
+                }
+            }
+            else {
+                System.out.println("Inserte un comando, para ayuda digite \"-h\", digite \"salir\" para salir del programa");
+                commandArgumentos = scan.nextLine();
+                command = limpiarEntrada(commandArgumentos);
+                commandArgumentos = commandArgumentos.replace(command, ""); //Obtener la lista de argumentos de un comando
+            }
             switch (command){
                 case "-h":
                     System.out.println("Asignación 2, Aseguramiento de la Calidad del Software" + "\n" +
@@ -137,11 +109,17 @@ class Main {
                     f = Fechas.parseFecha(commandArgumentos);
                     System.out.println(u.fecha_futura_habil(f).toString());
                     break;
-                    /* TODO
                 case "probar_archivo ":
-                    testFile(u, commandArgumentos);
+                    //Modificado Asignación 3 Bryan Mena Villalobos,
+                    // Cambia la entrada de comandos del stdin a un stream de datos desde un archivo
+                    File archivo = new File(commandArgumentos);
+                    try {
+                        scan = new Scanner(archivo);
+                        testing = true;
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Archivo no encontrado\n");
+                    }
                     break;
-                    */
                 case "dia_semana ":
                     f = Fechas.parseFecha(commandArgumentos);
                     int dia = u.dia_semana(f);
@@ -161,6 +139,8 @@ class Main {
                     break;
                 case "salir":
                     salir = true;
+                    break;
+                case "ignored":
                     break;
                 default:
                     System.out.println("Comando Invalido, intente de nuevo");

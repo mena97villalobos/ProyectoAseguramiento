@@ -91,17 +91,8 @@ class Utilitarias {
     }
 
     int dia_primero_enero(int anno){
-        int ultimos2Digitos = anno%100;
-        int siglo = anno/100+1;
-        int anchorDay = ((5*siglo + ((siglo-1) / 4))+4)%7;
-        int diaReferencia = (((ultimos2Digitos/12) + ultimos2Digitos%12 + (ultimos2Digitos%12 / 4)) + anchorDay)%7;
-        int resultado;
-        int offset = bisiesto(anno) ? -3 : -2;
-        resultado = (diaReferencia + offset)%7;
-        if(resultado < 0){
-            resultado = 7 + resultado;
-        }
-        return resultado;
+        //Modificado Asignación 3 para redirigir retorno al metodo dia_Semana agregado en asignación 3
+        return dia_semana(new Fechas(anno, 1, 1));
     }
 
     //Agregado asignación 3
@@ -142,6 +133,8 @@ class Utilitarias {
     }
 
     private void getDiasNoHabiles(Fechas f){
+        //Obtiene los dias no habiles que hay entre una cantidad de dias naturales
+        //Basado en el día en el que se esta
         int diasNoHabiles = 0;
         int diaSemana = dia_semana(f);
         int n = f.aux;

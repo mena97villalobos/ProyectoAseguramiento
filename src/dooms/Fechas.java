@@ -1,9 +1,7 @@
 package dooms;
 
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 class Fechas {
     int anno;
