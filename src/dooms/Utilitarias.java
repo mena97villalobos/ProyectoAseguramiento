@@ -161,8 +161,6 @@ class Utilitarias {
     }
 
     Fechas fecha_futura_habil(Fechas f){
-        if (f == null)
-            System.exit(-1); //todo SÁFESE ALV PERRO
         getDiasNoHabiles(f);
         f = fecha_futura(f);
         if(dia_semana(f) == 0)
