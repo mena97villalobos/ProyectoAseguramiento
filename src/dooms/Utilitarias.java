@@ -139,22 +139,26 @@ class Utilitarias {
         int diaSemana = dia_semana(f);
         int n = f.aux;
         while(n > 0){
-            if(diaSemana == 6){
-                diasNoHabiles += 2;
-                diaSemana = 1;
-            }
             if(diaSemana == 0){
                 diasNoHabiles += 1;
                 diaSemana = 1;
             }
-            diasNoHabiles += 1;
-            diaSemana += 1;
-            n--;
+            else if(diaSemana == 6){
+                diasNoHabiles += 1;
+                diaSemana = 0;
+            }
+            else {
+                diasNoHabiles += 1;
+                diaSemana += 1;
+                n--;
+            }
         }
         f.aux = diasNoHabiles;
     }
 
     Fechas fecha_futura_habil(Fechas f){
+        if (f == null)
+            System.exit(-1); //todo SÁFESE ALV PERRO
         getDiasNoHabiles(f);
         f = fecha_futura(f);
         if(dia_semana(f) == 0)
@@ -208,14 +212,13 @@ class Utilitarias {
         }
         int diaActual = dia_semana(fechaInicio);
         while (!fechaInicio.equals(fechaFin)){
-            if(diaActual == 6){
-                fechaInicio.aux = 2;
-                fechaInicio = fecha_futura(fechaInicio);
-                diaActual = 1;
-            }
-            else if(diaActual == 0){
+            if(diaActual == 0){
                 fechaInicio = dia_siguiente(fechaInicio);
                 diaActual = 1;
+            }
+            else if(diaActual == 6){
+                fechaInicio = dia_siguiente(fechaInicio);
+                diaActual = 0;
             }
             else {
                 contador += 1;
