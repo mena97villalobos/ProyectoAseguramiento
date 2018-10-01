@@ -138,15 +138,20 @@ class Utilitarias {
         int diasNoHabiles = 0;
         int diaSemana = dia_semana(f);
         int n = f.aux;
+        //Se hará un while hasta que se acaben los días
         while(n > 0){
+            //Si es domingo, aumente los días por recorrer en total en uno, actualice a lunes, pero no decremente
+            //los días hábiles por recorrer
             if(diaSemana == 0){
                 diasNoHabiles += 1;
                 diaSemana = 1;
             }
+            //Si es sábado, aumente un día los no hábiles y pase a domingo, no actualice los días hábiles que faltan
             else if(diaSemana == 6){
                 diasNoHabiles += 1;
                 diaSemana = 0;
             }
+            //Si es un día hábil súmele uno, y decremente los días que faltan por contar
             else {
                 diasNoHabiles += 1;
                 diaSemana += 1;
@@ -211,15 +216,19 @@ class Utilitarias {
             fechaInicio = f1;
         }
         int diaActual = dia_semana(fechaInicio);
+        //Mientras las fechas no se igualen, vamos a sumarle una a la menor hasta que se equiparen
         while (!fechaInicio.equals(fechaFin)){
+            //Si es domingo, súme un día, actualice a lunes la fecha actual
             if(diaActual == 0){
                 fechaInicio = dia_siguiente(fechaInicio);
                 diaActual = 1;
             }
+            //Si es sábado, actualice a domingo
             else if(diaActual == 6){
                 fechaInicio = dia_siguiente(fechaInicio);
                 diaActual = 0;
             }
+            //En caso contradrio, aumente al siguiente día, además aumente un día hábil entre las fechas
             else {
                 contador += 1;
                 fechaInicio = dia_siguiente(fechaInicio);
