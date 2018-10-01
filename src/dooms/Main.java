@@ -79,14 +79,26 @@ class Main {
                     break;
                 case "fecha_es_valida ":
                     f = Fechas.parseFecha(commandArgumentos);
+                    if(f == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.fecha_es_valida(f));
                     break;
                 case "dia_siguiente ":
                     f = Fechas.parseFecha(commandArgumentos);
+                    if(f == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.dia_siguiente(f).toString());
                     break;
                 case "dias_desde_primero_enero ":
                     f = Fechas.parseFecha(commandArgumentos);
+                    if(f == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.dias_desde_primero_enero(f));
                     break;
                 case "dia_primero_enero ":
@@ -101,10 +113,18 @@ class Main {
                 //Se añaden los nuevos requerimientos funcionales al menu de línea de comando
                 case "fecha_futura ":
                     f = Fechas.parseFecha(commandArgumentos);
+                    if(f == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.fecha_futura(f).toString());
                     break;
                 case "fecha_futura_habil ":
                     f = Fechas.parseFecha(commandArgumentos);
+                    if(f == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.fecha_futura_habil(f).toString());
                     break;
                 case "probar_archivo ":
@@ -120,19 +140,30 @@ class Main {
                     break;
                 case "dia_semana ":
                     f = Fechas.parseFecha(commandArgumentos);
-                    int dia = u.dia_semana(f);
-                    System.out.println(dia);
+                    if(f == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
+                    System.out.println(u.dia_semana(f));
                     break;
                 case "dias_entre ":
                     aux = commandArgumentos.split(", ");
                     f = Fechas.parseFecha(aux[0]);
                     f2 = Fechas.parseFecha(aux[1]);
+                    if(f == null || f2 == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.dias_entre(f, f2));
                     break;
                 case "dias_habiles_entre ":
                     aux = commandArgumentos.split(",");
                     f = Fechas.parseFecha(aux[0]);
                     f2 = Fechas.parseFecha(aux[1]);
+                    if(f == null || f2 == null) {
+                        System.out.println("Fecha es invalida");
+                        break;
+                    }
                     System.out.println(u.dias_habiles_entre(f, f2));
                     break;
                 case "salir":
