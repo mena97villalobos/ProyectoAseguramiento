@@ -126,7 +126,6 @@ class Utilitarias {
                 //Actualizar valores del tope del mes y de la diferencia de mes
                 topeMes = f.mes == 2 ? (bisiesto(f.anno) ? 29 : 28) : (meses31.indexOf(f.mes) != -1 ? 31 : 30);
                 diferenciaMes = topeMes - f.dia;
-                n --;
             }
         }
         return f;
@@ -217,7 +216,7 @@ class Utilitarias {
         }
         int diaActual = dia_semana(fechaInicio);
         //Mientras las fechas no se igualen, vamos a sumarle una a la menor hasta que se equiparen
-        while (!fechaInicio.equals(fechaFin)){
+        while (!fechaInicio.equals(fechaFin) && fechaFin.esMayorQue(fechaInicio)){
             //Si es domingo, súme un día, actualice a lunes la fecha actual
             if(diaActual == 0){
                 fechaInicio = dia_siguiente(fechaInicio);
