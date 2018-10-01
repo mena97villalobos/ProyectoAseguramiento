@@ -1,6 +1,7 @@
 \documentclass[10pt,journal,compsoc]{IEEEtran}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{float}
 \usepackage[spanish]{babel}
 \graphicspath{ {D:/OneDrive/TEC/II Semestre 2018/Aseguramiento/Asignación 3/} }
 \renewcommand*\contentsname{\'Indice}
@@ -41,7 +42,7 @@
 
 \lstset{style=mystyle}
 
-
+\renewcommand*{\lstlistingname}{Notas}
 
 \hyphenation{op-tical net-works semi-conduc-tor}
 
@@ -80,7 +81,7 @@
 	\par Para finalizar con el trabajo se realizaron una serie de pruebas para verificar los requerimientos funcionales dados en la especificación:
 	
 \subsection{Diagrama de Clases}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{diagramaClases.png}
 	\caption{Diagrama de Clases de la Asignación 3 integrado con la Asignación 2}
