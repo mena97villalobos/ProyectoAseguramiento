@@ -234,7 +234,7 @@ class Utilitarias {
 		int topeMes = f.mes == 2 ? (bisiesto(f.anno) ? 29 : 28) : (meses31.indexOf(f.mes) != -1 ? 31 : 30);
 		int diferenciaMes = topeMes - f.dia;
 		while(n > 0){
-			if(diferenciaMes > n){
+			if(diferenciaMes >= n){
 				f.dia += n;
 				break;
 			}
@@ -247,7 +247,6 @@ class Utilitarias {
 				f.mes = 1;
 				f.dia = 1;
 				diferenciaMes = 30;
-				n --;
 			}
 			else{
 				f.mes++;

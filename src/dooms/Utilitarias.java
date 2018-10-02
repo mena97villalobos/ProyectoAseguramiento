@@ -104,7 +104,7 @@ class Utilitarias {
         int topeMes = f.mes == 2 ? (bisiesto(f.anno) ? 29 : 28) : (meses31.indexOf(f.mes) != -1 ? 31 : 30);
         int diferenciaMes = topeMes - f.dia; //Diferencia de días para llegar al tope del mes
         while(n > 0){
-            if(diferenciaMes > n){ //Si n es menor que la diferencia de mes solo se suma n y se retorna
+            if(diferenciaMes >= n){ //Si n es menor que la diferencia de mes solo se suma n y se retorna
                 f.dia += n;
                 break;
             }
@@ -118,7 +118,6 @@ class Utilitarias {
                 f.dia = 1;
                 //Actualizar valores del tope del mes y de la diferencia de mes
                 diferenciaMes = 30;
-                n --;
             }
             else{
                 f.mes++;
