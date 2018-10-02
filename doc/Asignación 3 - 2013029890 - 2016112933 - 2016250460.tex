@@ -65,7 +65,7 @@
 	\par Para el desarrollo de esta asignación se siguen los requerimientos dados en la especificación de la Asignación 3, además, se mantienen los requerimientos de validación expuestos en la Asignación 2:
 	\begin{itemize}
 		\item Validación de fechas: Como se menciona en el resumen de la investigación acerca del calendario gregoriano se requiere la validación de la excepción existente en el calendario (Salto del 4 de Octubre de 1582 al 15 de Octubre de 1582).
-		\item R8 Validación del año: Se requiere que el año que se esta evaluando en funciones como \textit{bisiesto} sea valido dentro del contexto del programa, esto es: año $\geq$ 1582
+		\item Validación del año: Se requiere que el año que se esta evaluando en funciones como \textit{bisiesto} sea valido dentro del contexto del programa, esto es: año $\geq$ 1582
 	\end{itemize}  
 
 \section{Trabajo Final}
@@ -87,23 +87,32 @@
 		\begin{tabular}{c|c|c|c}
 		&\textbf{B. Mena} & \textbf{P.Brenes} & \textbf{F. Quirós}\\
 		\hline\newline
-		Investigación	& 30 & &60 \\
-		Diseño			& 15 & &15 \\
-		Programación 	& 60 & &45 \\
-		Pruebas 		& 45 & &30 \\
-		Correciones 	& 35 & &15 \\
-		Re-Trabajo 		& 35 & &15 \\
-		Documentación 	& 15 & &30 \\
-		Integración 	& 15 & &15 \\
+		Investigación	& 30 & 10 &60 \\
+		Diseño			& 15 & 15 &15 \\
+		Programación 	& 60 & 30 &45 \\
+		Pruebas 		& 45 & 90 &30 \\
+		Correciones 	& 35 & 20 &15 \\
+		Re-Trabajo 		& 35 & 15 &15 \\
+		Documentación 	& 15 & 5 &30 \\
+		Integración 	& 15 & 15 &15 \\
 		\hline
 		\hline\newline
-		TOTAL 			& 250 min & & 225 min
+		TOTAL 			& 250 min & 200 min & 225 min
 \end{tabular}
 \end{center}
 \end{table}
 \subsection{Pruebas Realizadas}
-	\par Para finalizar con el trabajo se realizaron una serie de pruebas para verificar los requerimientos funcionales dados en la especificación:
-	
+	\par Para finalizar con el trabajo se realizaron una serie de pruebas para verificar los requerimientos funcionales dados en la especificación, estas pruebas se realizan mediante un archivo de pruebas (incluido en los ):
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{pruebas2.png}
+		\caption{Pruebas de los requerimientos funcionales de esta asignación}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{pruebas1.png}
+		\caption{Pruebas de los requerimientos funcionales de esta asignación}
+	\end{figure}
 \subsection{Diagrama de Clases}
 \begin{figure}[H]
 	\centering
@@ -132,10 +141,15 @@
 	\item \textbf{\textit{probar\textunderscore archivo nombre}}: Ejecuta cada comando por linea en el archivo de prueba (bajo el mismo formato de los comandos) (Véase \textit{test.txt} incluido en la carpeta de código como un ejemplo del formato para el archivo de pruebas)
 	\item \textbf{\textit{salir}}: Termina la ejecución del programa
 \end{itemize}
-\par Para utilizar el programa se incluye un archivo .jar en la carpeta de Código Fuente llamado ProyectoAseguramiento este archivo puede utilizarse mediante el comando \textit{\textbf{java -jar ProyectoAseguramiento.jar}} en una consola de Windows como se muestra en la figura 6, si se desea compilar los archivos fuentes (disponibles dentro de la subcarpeta dooms de la carpeta Código Fuente) se debe tener en cuenta que todos los archivos pertenecen al paquete \textit{dooms}
+\par Para utilizar el programa se incluye un archivo .jar en la carpeta de Código Fuente llamado ProyectoAseguramiento (Este archivo tiene una extensión .jarr ya que por razones de seguridad archivos de tipo .jar no se pueden enviar por correo electrónico, para utilizar este archivo es \textbf{necesario} cambiar la extensión del archivo de .jarr a .jar) este archivo puede utilizarse mediante el comando \textit{\textbf{java -jar ProyectoAseguramiento.jar}} en una consola de Windows como se muestra en la figura 3, si se desea compilar los archivos fuentes (disponibles dentro de la subcarpeta dooms de la carpeta Código Fuente) se debe tener en cuenta que todos los archivos pertenecen al paquete \textit{dooms}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{corriendo.png}
+	\caption{Ejecutable de la Asignación 3 corriendo en una consola de Windows}
+\end{figure}
 
 \section{Análisis de Resultados}
-\par Con un poco más de tiempo y un trabajo más detallado salen a la luz pequeñas pulgas o malas decisiones de diseño que deben ser reparadas antes de integrar la Asignación 2 y la Asignación 3, esto nos muestra que el código está en constante cambio y por más que se revise el código antes de una entrega siempre aparecerán fallos
+\par Con un poco más de tiempo y un trabajo más detallado salen a la luz pequeñas pulgas o malas decisiones de diseño que deben ser reparadas antes de integrar la Asignación 2 y la Asignación 3, esto nos muestra que el código está en constante cambio y por más que se revise el código antes de una entrega siempre aparecerán fallos, o decisiones de diseño que no tomaron en cuenta futuras expansiones de los requerimientos.
 \newpage
 \onecolumn
 \appendices
